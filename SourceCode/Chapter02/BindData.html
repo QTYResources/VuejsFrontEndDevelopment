@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bind Data</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{a}}</p>
+      <p>{{b}}</p>
+    </div>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          a: 1,
+          b: 1
+        }
+      })
+      vm.$data.b = 2
+    </script>
+  </body>
+</html>
