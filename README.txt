@@ -27,6 +27,7 @@ Chapter02 第2章 基础特性
   02. BindData.html                                         ===> 绑定数据
   03. CustomHtmlTagBindData.html                            ===> 自定义组件使用 data
   04. BindMethod.html                                       ===> 绑定 DOM 事件
+  05. Lifecycle.html                                        ===> Vue 实例的生命周期
 
 Chapter03 第3章 指令
 
