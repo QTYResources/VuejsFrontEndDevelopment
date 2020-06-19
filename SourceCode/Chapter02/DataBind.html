@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Data Binding</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  </head>
+  <body>
+    <div id="app">
+      <span>Hello {{name}}</span><br/>
+      <span v-once="name">Hello {{name}}</span><br/>
+      <div v-bind:id="'id-' + id"></div>
+      <p>{{index + 1}}</p>
+      <p>{{index == 0 ? 'a' : 'b'}}</p>
+      <p>{{name.split('').join('|')}}</p>
+      <p>{{name | uppercase}}</p>
+      <img v-bind:src="avatar" />
+      <button v-on:click.stop="doClick">Button</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          id: 1,
+          index: 0,
+          name: 'Vue',
+          avatar: 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoPGAeBZ2WBYGJcC4TUWqQ8gHoia7NIh6WX5LnhsN0sq2fFlicxPhFTVwdXd7zd4T3DIyRdKrLWDdRA/132',
+          count: [1, 2, 3, 4, 5],
+          names: ['Vue1.0', 'Vue2.0'],
+          items: [
+            { name: 'Vue1.0', version: '1.0'},
+            { name: 'Vue1.1', version: '1.0'}
+          ]
+        },
+        methods: {
+          doClick: function() {
+            console.log('Button click.')
+          }
+        }
+      })
+      vm.$data.name="Vue.js"
+    </script>
+  </body>
+</html>
