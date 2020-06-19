@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Use Template</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>123</p>
+    </div>
+    <script id="tpl" type="x-template">
+      <div class="tpl">
+        <p>This is a tpl from script tag</p>
+      </div>
+    </script>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: '#app',
+        template: '#tpl'
+      })
+    </script>
+  </body>
+</html>

@@ -23,7 +23,7 @@ Chapter01 第1章 Vue.js简介
   04. CustomHtmlTag.html                                    ===> 自定义HTML标签
 
 Chapter02 第2章 基础特性
-
+  01. UseTemplate.html                                      ===> 使用模板
 
 Chapter03 第3章 指令
 
