@@ -26,6 +26,7 @@ Chapter02 第2章 基础特性
   01. UseTemplate.html                                      ===> 使用模板
   02. BindData.html                                         ===> 绑定数据
   03. CustomHtmlTagBindData.html                            ===> 自定义组件使用 data
+  04. BindMethod.html                                       ===> 绑定 DOM 事件
 
 Chapter03 第3章 指令
 

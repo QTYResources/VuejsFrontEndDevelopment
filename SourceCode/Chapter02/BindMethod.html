@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bind Method</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  </head>
+  <body>
+    <button id="app" v-on:click="alert">alert</button>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: '#app',
+        data: { a: 1 },
+        methods: {
+          alert: function() {
+            alert(this.a)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
