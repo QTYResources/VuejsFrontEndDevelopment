@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Custom HTML Tag</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <message content="Hello World"></message>
+    </div>
+    <script type="text/javascript">
+      var Message = Vue.extend({
+        props: ['content'],
+        template: '<h1>{{content}}</h1>'
+      })
+      Vue.component('message', Message)
+      var vm = new Vue({
+        el: '#app'
+      })
+    </script>
+  </body>
+</html>

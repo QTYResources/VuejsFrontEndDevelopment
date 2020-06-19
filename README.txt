@@ -20,7 +20,7 @@ Chapter01 第1章 Vue.js简介
   01. HelloWorldUseCDN.html                                 ===> 使用 CDN 引入 Vue.js
   02. HelloWorldUseNpm.html                                 ===> 使用 npm 引入 Vue.js
   03. BindUserInputData.html                                ===> 演示数据联动网页
-
+  04. CustomHtmlTag.html                                    ===> 自定义HTML标签
 
 Chapter02 第2章 基础特性
 
