@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <div v-if="isExist"></div>
+    <div v-my-directive="param"></div>
+  </div>  
+  <script type="text/javascript" src="./../vue.2.0-beta.1.js"></script>
+  <script type="text/javascript">
+
+Vue.directive('my-directive', {
+  bind : function(el, binding, vnode) {
+    console.log('~~~~~~~~~~bind~~~~~~~~~');
+    console.log('el', el);
+    console.log('binding', binding);
+    binding.value = 'first changed';
+  },
+  update : function(el, binding, vnode, oldVNode) {
+    console.log('~~~~~~~~~~update~~~~~~~~~');
+    console.log('el', el);
+    console.log('binding', binding);
+    console.log('vnode', vnode);
+    console.log('oldVNode', oldVNode);
+  },
+  componentUpdated(el, binding, vnode, oldVNode) {
+    console.log('~~~~~~~~~~componentUpdated~~~~~~~~~');
+    console.log('el', el);
+    console.log('binding', binding);
+    console.log('vnode', vnode);
+    console.log('oldVNode', oldVNode);
+  },
+  unbind : function(el, binding, vnode) {
+    console.log('~~~~~~~~~~unbind~~~~~~~~~');
+    console.log('el', el);
+    console.log('binding', binding);
+    console.log('vnode', vnode);
+  }
+});
+
+    var vm = new Vue({
+      el : '#app',
+      data : {
+        param : 'first',
+        isExist : true
+      }
+    });
+  </script>
+</body>
+</html>
+

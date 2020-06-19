@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <!-- 表单控件 Text代码示例  -->
+    <div>
+      <input type="text" v-model="message" />
+      <span>Your input is : {{ message }}</span>
+    </div>
+    <br>
+    <!-- 表单控件 Radio代码示例 -->
+    <div>
+      <label><input type="radio" value="male" v-model="gender">男</lable>
+      <label><input type="radio" value="female" v-model="gender">女</lable>
+      <span>{{ gender }}</span>
+    </div>
+    <!-- 表单控件 Checkbox 代码示例 -->
+    <br>
+    <div>
+      <input type="checkbox" v-model="checked"  value="123"/>
+      <span>checked : {{ checked }}</span>
+    </div>
+
+    <!-- 表单控件 多个 Checkbox 代码示例 -->
+    <br>
+    <div>
+      <label><input type="checkbox" value="1" v-model="multiChecked">1</lable>
+      <label><input type="checkbox" value="2" v-model="multiChecked">2</lable>
+      <label><input type="checkbox" value="3" v-model="multiChecked">3</lable>
+      <p>MultiChecked: {{ multiChecked.join('|') }}</p>
+    </div>
+    <!-- 表单控件 select 代码示例 -->
+    <br>
+    <div>
+      <select v-model="selected">
+        <option selected>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>Selected: {{ selected }}</span>
+    </div>
+
+    <!-- 表单控件 多选 select 代码示例 -->
+    <br>
+    <div>
+      <select v-model="multiSelected" multiple>
+        <option selected>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <br>
+      <span>MultiSelected: {{ multiSelected.join('|') }}</span>
+    </div>
+
+
+  </div>
+  <script type="text/javascript" src="./../../../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+  	var vm = new Vue({
+		  el : '#app',
+		  data: {
+		    message : '',
+        gender : '',
+        checked : '',
+        multiChecked : [],
+        selected : '',
+        multiSelected : []
+		  }
+		});
+  </script>
+</body>
+</html>
+

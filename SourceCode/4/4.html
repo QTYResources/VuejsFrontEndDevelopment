@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <div>
+      {{ date | date 'yyyy-MM-dd hh:mm:ss' }}
+    </div>
+    <input type="text" v-model="price | cents" >
+    <span>{{ date | dynamic price }}</span>
+  </div>
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+    // Vue.filter('date', function(value) {
+    //   if(!value instanceof Date) return ;
+    //   return value.toLocaleDateString();
+    // })
+
+  Vue.filter('date', function(value, format) {
+    var o = {
+      "M+": value.getMonth() + 1, //月份 
+      "d+": value.getDate(), //日 
+      "h+": value.getHours(), //小时 
+      "m+": value.getMinutes(), //分 
+      "s+": value.getSeconds(), //秒 
+    };
+
+    if (/(y+)/.test(format)) 
+      format = format.replace(RegExp.$1, (value.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+      if (new RegExp("(" + k + ")").test(format)) 
+        format = format.replace(RegExp.$1, (RegExp.$1.length == 1) 
+          ? (o[k]) 
+          : (("00" + o[k]).substr(("" + o[k]).length)));
+    return format;
+  })
+
+  Vue.filter('cents', {
+    read : function(value) {
+      return (value / 100).toFixed(2);
+    },
+    write : function(value) {
+      return value * 100;
+    }
+  });
+
+  Vue.filter('dynamic', function(date, price) {
+    return date.toLocaleDateString() + ' : ' + price;
+  });
+
+  var vm = new Vue({
+    el : '#app',
+    data: {
+      date : new Date(),
+      price : 150
+    }
+  });
+  </script>
+</body>
+</html>
+

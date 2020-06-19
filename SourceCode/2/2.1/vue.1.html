@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <p>123</p>
+  </div>
+  <script type="text/javascript" src="./../../vue.1.0.26.js"></script>
+  <script id="tpl" type="x-template">
+    <div class='tpl'>
+      <p>This is a tpl from script tag</p>
+      <p>{{a}}</p>
+      <p>{{b}}</p>
+      <button v-on:click="alert"/>alert</button>
+      <my-component title='myTitle' content='myContent'></my-component>
+    </div>
+  </script>
+  <script type="text/javascript">
+    var data = {
+      a : 1
+    }
+
+    var MyComponent = Vue.component('my-component', {
+      props : ['title', 'content'],
+      data : function() {
+        return {
+          title : '123'
+        }
+      },
+      template : '<h1>{{title}}</h1><p>{{content}}</p>'
+    })
+
+    var WrongDataComp = Vue.component('wrong-data', {
+      data : { a : 'a', b : 'b'},
+      template : '<h1>{{a}}</h1><p>{{b}}</p>'
+    })
+
+    var vm = new Vue({
+      el : '#app',
+      // template : '<div class="main"></div>'
+      template : '#tpl',
+      data : data,
+      methods : {
+        alert : function() {
+          alert(this.a);
+        }
+      },
+      events : {
+        'event.alert' : function() {
+          alert('this is event alert: ' + this.a);
+        }
+      }
+    });
+
+    // data.b = 2;
+
+    // $set 示例
+    // vm.$set('b', 3);
+
+    // $emit 示例
+    // vm.$emit('event.alert');
+
+  </script>
+</body>
+</html>
+

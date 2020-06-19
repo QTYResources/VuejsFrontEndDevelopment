@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <my-component></my-component>
+    <my-parent></my-parent>
+    <my-child></my-child>
+  </div>
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+
+    var MyComponent = Vue.extend({
+      template : '<p>This is a component</p>'
+    })
+
+    Vue.component('my-component', MyComponent)
+
+    var Child = Vue.extend({
+      template : '<p>This is a child component</p>'
+    });
+
+    var Parent = Vue.extend({
+      template: '<div> \
+          <p>This is a parent component</p> \
+          <my-child></my-child> \
+        </div>',
+      components: {
+        'my-child': Child
+      }
+    });
+
+    Vue.component('my-parent', Parent);
+
+    var vm = new Vue({
+      el : '#app'
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <!-- 事件绑定 -->
+    <button v-on:click="say">Say</button>
+    <button @click="say">Say</button>
+
+    <!-- 事件绑定 内联表达式 -->
+    <button @click="sayFrom('from param')">sayFrom</button>
+
+    <!-- 原生DOM事件 -->
+    <button v-on:click="showEvent">showEvent</button>
+    <button v-on:click="showEvent($event)">showEvent</button>
+
+    <!-- 事件修饰符 -->
+    <div v-on:click="saySelf('click from inner')" v-on:click.self="saySelf('click from self')">
+      <button v-on:click="saySelf('button click')">button</button>
+      <button v-on:click.stop="saySelf('just button click')">button</button>
+    </div>
+  </div>
+  <script type="text/javascript" src="./../../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+  	var vm = new Vue({
+		  el : '#app',
+		  data: {
+		    msg : 'Hello Vue.js'
+		  },
+      methods : {
+        say : function(e) {
+          alert(this.msg);
+        },
+        sayFrom : function(from) {
+          alert(this.msg + from);
+        },
+        showEvent : function(event) {
+          console.log(event);
+        },
+        saySelf(msg) {
+          alert(msg);
+        }
+      }
+		});
+  </script>
+</body>
+</html>
+

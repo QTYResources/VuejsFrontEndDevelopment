@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <h1>Your input is {{ message }}</h1>
+    <input type="text" v-model="message">
+  </div>  
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+  	var vm = new Vue({
+		  el : '#app',
+		  data: {
+		    message : ''
+		  }
+		});
+  </script>
+</body>
+</html>
+

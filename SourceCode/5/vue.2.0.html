@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+    .content {
+      width: 100px; height: 100px;
+      background: black; opacity: 1;
+      color: #fff;
+    }
+    .fade-enter, .fade-leave-active{
+      opacity: 0;
+    }
+    .fade-enter-active, .fade-leave-active{
+      transition: all 3s ease;
+    }
+
+    .list-li {
+      width: 100px; height: 20px;
+      transform: translate(0, 0);
+    }
+    .list-enter, .list-leave-active{
+      opacity: 0; transform: translate(-30px, 0);
+    }
+    .list-enter-active, .list-leave-active{
+      transition: all 0.5s ease; 
+    }
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <transition 
+      name="fade"
+      mode="out-in"
+      appear
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @appear="appear"
+
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+      @leave-cancelled="leaveCancelled"
+      >
+      <div class="content" v-if="ok">{{ ok }}</div>
+      <!-- <div class="content" v-show="ok">{{ ok }}</div> -->
+      <!-- <div class="content" :key="ok">{{ ok }}</div> -->
+    </transition>
+
+    <!-- transition-group -->
+    <transition-group tag="ul" name="list" appear>
+      <li v-for="item in items" :key="item.id" class="list-li">
+        {{ item.text }}
+      </li>
+    </transition-group>
+  </div>  
+  <script type="text/javascript" src="./../vue.2.0.1.js"></script>
+  <script type="text/javascript">
+
+  var vm = new Vue({
+    el : '#app',
+    data : {
+      ok : true,
+      items : [
+        { id : 1, text : '11' },
+        { id : 2, text : '22' },
+        { id : 3, text : '33' },
+        { id : 4, text : '44' }
+      ]
+    },
+    methods : {
+      beforeEnter : function(el) {
+        console.log('beforeEnter', el.className);
+      },
+      enter : function(el) {
+        console.log('enter', el.className);
+      },
+      afterEnter : function(el) {
+        console.log('afterEnter', el.className);
+      },
+      enterCancelled: function (el) {
+        console.log('enterCancelled', el.className);
+      },
+      appear : function(el) {
+        console.log('appear', el.className);
+      },
+      beforeLeave : function(el) {
+        this.leaveTime = new Date();
+        console.log('beforeLeave', el.className);
+      },
+      leave : function(el) {
+        console.log('leave', el.className, new Date() - this.leaveTime);
+      },
+      afterLeave : function(el) {
+        console.log('afterLeave', el.className, new Date() - this.leaveTime);
+      },
+      leaveCancelled : function(el) {
+        console.log('leaveCancelled', el.className);
+      }
+    }
+  });
+
+  </script>
+</body>
+</html>
+

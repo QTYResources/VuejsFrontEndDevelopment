@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="message" />
+    <my-component v-bind:message="message"></my-component>
+    <my-num :num="num"></my-num>
+    <div>
+        Parent component: <input type="text" v-model="msg" />
+    </div>
+    <!-- <my-bind :msg="msg"></my-bind> -->
+    <!-- <my-bind :msg.sync="msg"></my-bind> -->
+    <my-bind :msg.once="msg"></my-bind>
+  </div>
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+
+    var MyComponent = Vue.extend({
+      props : ['message'],
+      template : "<p>{{ 'From parent : ' + message }}</p>"
+    });
+
+    Vue.component('my-component', MyComponent);
+
+    Vue.component('my-num', {
+      props : ['num'],
+      template : "<p>{{ num + ' is a ' + typeof num }}</p>"
+    });
+
+    Vue.component('my-bind', {
+      props : ['msg'],
+      template : '<div> \
+        Child component : \
+        <input type="text" v-model="msg"/> \
+      </div>'
+    });
+
+    var vm = new Vue({
+      el : '#app',
+      data : {
+        message : 'default',
+        num : 1,
+        msg : ''
+      }
+    });
+
+  </script>
+</body>
+</html>

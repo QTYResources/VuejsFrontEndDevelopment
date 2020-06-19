@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a v-link="{ path : '/home'}">Home</a>
+            </li>
+            <li>
+              <a v-link="{ path : '/list'}">List</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <router-view></router-view>
+    </div>
+  </div>
+  <script src='http://cdn.jsdelivr.net/vue/1.0.26/vue.min.js'></script>
+  <script src='http://cdn.jsdelivr.net/vue.router/0.7.10/vue-router.min.js'></script>
+  <script type="text/javascript">
+    var Home = Vue.extend({
+      template : '<h1>This is the home page</h1>'
+    });
+
+    // 路由器需要一个根组件。
+    // 出于演示的目的，这里使用一个空的组件，直接使用 HTML 作为应用的模板
+    var App = Vue.extend({})
+
+    // 创建一个路由器实例
+    // 创建实例时可以传入配置参数进行定制，为保持简单，这里使用默认配置
+    var router = new VueRouter()
+
+    // 定义路由规则
+    // 每条路由规则应该映射到一个组件。这里的“组件”可以是一个使用 Vue.extend
+    // 创建的组件构造函数，也可以是一个组件选项对象。
+    router.map({
+      '/home': {
+          component: Home
+      },
+      '/list': {
+        component : {
+          template: '<h1>This is the list page</h1>'
+        }
+      }
+    })
+
+    // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
+    router.start(App, '#app')
+  </script>
+</body>
+</html>

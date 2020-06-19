@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+  <link href="http://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+  <style type="text/css">
+
+    .my-startup-transition {
+      transition: all 1s ease;
+      width: 100px; height: 100px;
+      background: black;
+      opacity: 1;
+    }
+
+    .my-startup-enter, .my-startup-leave{
+      height: 0px;
+      opacity: 0;
+    }
+
+    .fadeIn, .fadeOut{
+      height: 0px;
+      opacity: 0;
+    }
+
+    .my-animation-transition {
+      animation: increase 1s ease 0s 1;
+      width: 100px;
+      height: 100px;
+      background: black;
+    }
+    .my-animation-enter, .my-animation-leave {
+      height: 0px;
+    }
+    @keyframes increase {
+      from { height: 0px; }
+      to { height: 100px; }
+    }
+
+    /*.my-startup-transition {
+      transition: all 1s ease;
+      width: 100px; height: 100px;
+      background: black;
+      opacity: 1;
+    }
+
+    .my-startup-enter, .my-startup-leave{
+      height: 0px;
+      opacity: 0;
+    }*/
+
+    .my-done-transition {
+      transition: all 2s ease;
+      width: 100px; height: 100px;
+      background: black;
+      opacity: 1;
+    }
+
+    .my-done-enter, .my-done-leave{
+      height: 0px;
+      opacity: 0;
+    }
+
+    .my-velocity-transition {
+      position: absolute; top:0px;
+      width: 100px; height: 100px;
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-if="show" transition="my-startup">hello</div>
+    <div v-if="animation" transition="my-animation">animation</div>
+    <div v-if="done" transition="my-done"></div>
+    <div v-if="velocity" transition="my-velocity"></div>
+    <div v-if="animate" transition='animated'></div>
+    <div v-if="animateShow" class="animated" transition="bounce">bounce effect</div>
+  </div>
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript" src="./velocity.js"></script>
+  <script type="text/javascript">
+  
+    Vue.transition('my-startup', {
+      enterClass: 'fadeIn',
+      leaveClass: 'fadeOut',
+      beforeEnter: function (el) {
+        console.log('beforeEnter', el.className);
+      },
+      enter: function (el) {
+        console.log('enter', el.className);
+      },
+      afterEnter: function (el) {
+        console.log('afterEnter', el.className);
+      },
+      enterCancelled: function (el) {
+        console.log('enterCancelled', el.className);
+      },
+
+      beforeLeave: function (el) {
+        console.log('beforeLeave', el.className);
+      },
+      leave: function (el) {
+        console.log('leave', el.className);
+      },
+      afterLeave: function (el) {
+        console.log('afterLeave', el.className);
+      },
+      leaveCancelled: function (el) {
+        console.log('leaveCancelled', el.className);
+      }
+    })
+
+    Vue.transition('my-animation', {
+      beforeEnter: function (el) {
+        console.log('beforeEnter', el.className);
+      },
+      enter: function (el) {
+        console.log('enter', el.className);
+      },
+      afterEnter: function (el) {
+        console.log('afterEnter', el.className);
+      },
+      enterCancelled: function (el) {
+        console.log('enterCancelled', el.className);
+      },
+
+      beforeLeave: function (el) {
+        console.log('beforeLeave', el.className);
+      },
+      leave: function (el) {
+        console.log('leave', el.className);
+      },
+      afterLeave: function (el) {
+        console.log('afterLeave', el.className);
+      },
+      leaveCancelled: function (el) {
+        console.log('leaveCancelled', el.className);
+      }
+    })
+
+    Vue.transition('my-done', {
+      enter: function (el, done) {
+        this.enterTime = new Date();
+        setTimeout(done, 500);
+      },
+      afterEnter: function (el) {
+        console.log('afterEnter', new Date() - this.enterTime);
+      },
+      leave: function (el, done) {
+        setTimeout(done, 500);
+      }
+    })
+
+    Vue.transition('my-velocity', {
+      css : false,
+      enter: function (el, done) {
+        Velocity(el, { left : '100px' }, 500, 'swing', done);
+      },
+      enterCancelled: function (el) {
+        Velocity(el, 'stop');
+      },
+      leave: function (el, done) {
+        Velocity(el, { left : '0px' }, 500, 'swing', done);
+      },
+      leaveCancelled: function (el) {
+        Velocity(el, 'stop');
+      }
+    })
+
+    Vue.transition('bounce', {
+      enterClass: 'bounceIn',
+      leaveClass: 'bounceOut'
+    })
+
+    var vm = new Vue({
+      el : '#app',
+      data: {
+        show : false,
+        animation : false,
+        done : false,
+        velocity : false,
+        animateShow : false
+      }
+    });
+  </script>
+</body>
+</html>

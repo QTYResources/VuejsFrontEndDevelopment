@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+  </div>
+  <script type="text/javascript" src="./../../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+  var vm = new Vue({
+    el : '#app',
+    init: function() {
+      console.log('init');
+    },
+    created: function() {
+      console.log('created');
+    },
+    beforeCompile: function() {
+      console.log('beforeCompile');
+    },
+    compiled: function() {
+      console.log('compiled');
+    },
+    attached: function() {
+      console.log('attached');
+    },
+    dettached: function() {
+      console.log('dettached');
+    },
+    beforeDestroy: function() {
+      console.log('beforeDestroy');
+    },
+    destroyed: function() {
+      console.log('destroyed');
+    },
+    ready: function() {
+      console.log('ready');
+      this.$destroy();
+    }
+  });
+  </script>
+</body>
+</html>
+

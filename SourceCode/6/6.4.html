@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- slot 且均能匹配  -->
+    <my-slot>
+      <p slot="title">{{ title }}</p>
+      <div slot="content">{{ content }}</div>
+    </my-slot>
+    <!-- 匿名slot -->
+    <anonymous-slot>
+      <div>{{ content }}</div>
+      <p slot="title">{{ title }}</p>
+    </anonymous-slot>
+    <!-- slot 有元素找不到匹配 -->
+    <my-slot>
+      <div>{{ content }}</div>
+      <p slot="title">{{ title }}</p>
+    </my-slot>
+
+    <!-- 重复slot  -->
+    <my-slot>
+      <p slot="title">{{ title + '1' }}</p>
+      <p slot="title">{{ title + '2' }}</p>
+      <div slot="content">{{ content }}</div>
+    </my-slot>
+    
+    <!-- scope -->
+    <my-scope-slot>
+      <p slot="title">{{ childData }}</p>
+    </my-scope-slot>
+  </div>
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+
+  Vue.component('my-slot', {
+    template : '<div>\
+        <div class="title"> \
+          <slot name="title"></slot> \
+        </div> \
+        <div class="content"> \
+          <slot name="content"></slot> \
+        </div> \
+      </div>'
+  });
+
+  // 匿名slot
+  Vue.component('anonymous-slot', {
+    template : '<div>\
+        <div class="title"> \
+          <slot name="title"></slot> \
+        </div> \
+        <div class="content"> \
+          <slot></slot> \
+        </div> \
+      </div>',
+  });
+
+  // scope
+  Vue.component('my-scope-slot', {
+    template : '<div>\
+        <p>{{ "child: " + childData }}</p> \
+        <slot name="title"></slot> \
+      </div>',
+    data() {
+      return {
+        childData : 'child scope'
+      }
+    }
+  });
+
+  var vm = new Vue({
+    el : '#app',
+    data : {
+      title : 'This is a title',
+      content : 'This is the content'
+    }
+  });
+
+  </script>
+</body>
+</html>

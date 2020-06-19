@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <!-- 文本插值代码示例  -->
+    <p>
+      <span>{{ name }}</span>
+      <span v-once="id">{{id}}</span>
+    </p>
+    
+    <!-- HTML属性插值代码示例  -->
+    <div v-bind:id="'id-' + id"></div>
+    <div :id="'id-' + id"></div>
+
+    <!-- 绑定表达式代码示例  -->
+    <p>
+      <span>{{ index + 1 }}</span>
+      <span>{{ index == 0 ? 'a' : 'b' }}</span>
+      <span>{{ name.split('').join('|') }}</span>
+      <span>{{ !index && name }}</span>
+      <!-- 无效表达式 -->
+      <!-- <span>{{ var a = 1 }}</span> -->
+      <!-- <span>{{ if(index == 0) return name }}</span> -->
+    </p>
+
+    <!-- 内置过滤器示例 -->
+    <p>
+      <span>{{ name | uppercase }}</span>
+      <span>{{ name.split('') | limitBy 3 1 }}</span>
+    </p>
+  </div>
+  <script type="text/javascript" src="./../../../vue.2.0-beta.1.js"></script>
+  <script type="text/javascript">
+  	var vm = new Vue({
+		  el : '#app',
+		  data: {
+		    id : 1,
+		    index : 0,
+		    name : 'Vue',
+		    avatar : 'http://……'
+		  }
+		});
+    // vm.name = 'Vue 2.0';
+
+  </script>
+</body>
+</html>
+

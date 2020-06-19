@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <my-view keep-alive></my-view>
+  </div>
+  <script type="text/javascript" src="./../../vue.2.0-beta.1.js"></script>
+  <script type="text/javascript">
+  	var MyView = Vue.component('myView', {
+      template : '<div><p>{{a}}</p><button @click="destroy()"/><input v-model="a" /></div>',
+      data : function() {
+        return {
+          a : 1
+        }
+      },
+      methods : {
+        destroy : function() {
+          this.$destroy();
+        }
+      },
+      beforeCreate: function() {
+        console.log('beforeCreate');
+      },
+      created: function() {
+        console.log('created');
+      },
+      beforeMount: function() {
+        console.log('beforeMount');
+      },
+      compiled: function() {
+        console.log('compiled');
+      },
+      activated: function() {
+        console.log('activated', document.getElementById('app').innerHTML);
+      },
+      deactivated: function() {
+        console.log('deactivated');
+      },
+      beforeDestroy: function() {
+        console.log('beforeDestroy');
+      },
+      destroyed: function() {
+        console.log('destroyed');
+      },
+      mounted: function() {
+        console.log('mounted');
+        // this.$destroy();
+      },
+      beforeUpdate: function(argu) {
+        console.log('beforeUpdate', document.getElementById('app').innerHTML);
+      },
+      updated: function(argu) {
+        console.log('updated', document.getElementById('app').innerHTML);
+      }
+		});
+
+    new Vue({
+      el : '#app'
+    })
+  </script>
+</body>
+</html>
+

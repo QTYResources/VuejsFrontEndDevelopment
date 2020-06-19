@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <!-- 计算属性 setter getter 示例 -->
+    <p>&yen;{{ price }}</p>
+  </div>
+  <script type="text/javascript" src="./../../../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+  	var vm = new Vue({
+      el : '#app',
+      data: {
+        cents : 100
+      },
+      computed : {
+        price : {
+          set : function(newValue) {
+            this.cents = newValue * 100;
+          },
+          get : function() {
+            return (this.cents / 100).toFixed(2);
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+   <!--  基础用法 -->
+     <ul>
+      <li @click="currentView = 'home'">Home</li>
+      <li @click="currentView = 'list'">List</li>
+      <li @click="currentView = 'detail'">Detail</li>
+    </ul>
+    <component :is="currentView"></component>
+    <!--  keep-alive -->
+    <component :is="currentView" keep-alive></component>
+
+   </div>
+  </div>
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+
+  // 基础用法
+  // var vm = new Vue({
+  //   el : '#app',
+  //   data: {
+  //     currentView: 'home'
+  //   },
+  //   components: {
+  //     home: {
+  //       template : '<div>Home</div>'
+  //     },
+  //     list: {
+  //       template : '<div>List</div>'
+  //     },
+  //     detail: {
+  //       template : '<div>Detail</div>'
+  //     }
+  //   }
+  // });
+
+  // keep-alive
+  // var vm = new Vue({
+  //   el : '#app',
+  //   data: {
+  //     currentView: 'home'
+  //   },
+  //   components: {
+  //     home: {
+  //       template : '<div> \
+  //         <p>Home</p> \
+  //         <ul> \
+  //           <li v-for="item in items">{{ item }}</li> \
+  //         </ul> \
+  //       </div>',
+  //       data : function() {
+  //         return {
+  //           items : []
+  //         }
+  //       },
+  //       ready : function() {
+  //         console.log('fetch data');
+  //         this.items = [1, 2, 3, 4, 5];
+  //       }
+  //     },
+  //     list: {
+  //       template : '<div>List</div>'
+  //     },
+  //     detail: {
+  //       template : '<div>Detail</div>'
+  //     }
+  //   }
+  // });
+
+  // activate 
+  var vm = new Vue({
+    el : '#app',
+    data: {
+      currentView: 'home'
+    },
+    components: {
+      home: {
+        template : '<div> \
+          <p>Home</p> \
+          <ul> \
+            <li v-for="item in items">{{ item }}</li> \
+          </ul> \
+        </div>',
+        data : function() {
+          return {
+            items : []
+          }
+        },
+        activate : function(done) {
+          var that = this;
+          setTimeout(function() {
+            that.items = [1, 2, 3, 4, 5];
+            done();
+          }, 1000);
+        }
+      },
+      list: {
+        template : '<div>List</div>'
+      },
+      detail: {
+        template : '<div>Detail</div>'
+      },
+      static : {
+        template : '<p>static</p>',
+        activate : function() {
+          console.log('activate');
+        }
+      }
+    }
+  });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <div id="modal"></div>
+    <div v-inject:modal>
+      <h1>header</h1>
+      <p>body</p>
+      <p>footer</p>
+    </div>
+
+  </div>  
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+    var FragmentFactory = Vue.FragmentFactory // 
+    var remove = Vue.util.remove
+    var createAnchor = Vue.util.createAnchor
+
+    Vue.directive('inject', {
+      terminal: true,
+      bind: function () {
+        debugger;
+        var container = document.getElementById(this.arg)
+        this.anchor = createAnchor('v-inject')  // 创建v-inject锚点，本质是一个注释节点或文本节点，用来标识
+        container.appendChild(this.anchor)
+        remove(this.el)
+        var factory = new FragmentFactory(this.vm, this.el)
+        this.frag = factory.create(this._host, this._scope, this._frag)
+        this.frag.before(this.anchor)
+      },
+      unbind: function () {
+        this.frag.remove()
+        remove(this.anchor)
+      }
+    })
+
+
+    var vm = new Vue({
+      el : '#app',
+      data : {
+        param : 'first',
+        content : 'there is the content',
+        isExist : false,
+        isMsg : true,
+        a : 'dynamic data',
+        i : 0,
+        obj : {
+          a : {
+            b : 'inner'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

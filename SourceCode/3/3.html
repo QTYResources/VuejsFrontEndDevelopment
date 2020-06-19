@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <svg width='400' height='300' :view-box.camel='viewBox'
+    style="border:1px solid #cd0000;"
+    ></svg>
+    <div v-if="isExist" v-my-directive="param"></div>
+    <!-- literal -->
+    <div v-my-directive="constant string"></div>
+    <div v-my-directive="'constant string'"></div>
+    <div v-my-directive.literal="constant string"></div>
+
+    <!-- JavaScript 表达式 -->
+    <div v-my-directive="{ title : 'Vue.js', author : 'You'}" ></div>
+    <div v-my-directive="isExist ? 'yes' : 'no'" ></div>
+
+    <div v-if="isMsg" v-my-msg:console.log="content"></div>
+    <message ></message>
+
+    <!-- elementDirective -->
+    <my-ele-directive></my-ele-directive>
+
+    <!-- advance-directive -->
+    <div v-my-advance-directive a="paramA"></div>
+    <div v-my-advance-directive v-bind:a="a"></div>
+
+    <!-- deep -->
+    <div v-my-deep-directive="obj"></div>
+    <div v-my-nodeep-directive="obj"></div>
+
+    <!-- twoway -->
+    <input type="text" v-my-twoway-directive="param" / >
+    <input type="text" v-my-notwoway-directive="param" / >
+
+    <!-- acceptStatement -->
+    <div v-my-statement-directive="i++" />
+  </div>  
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+    var Message = Vue.extend({
+      props : ['content'],
+      template : '<h1 v-local-directive>{{content}}</h1>',
+      directives : {
+        'localDirective' : {}
+      }
+    });
+
+    Vue.component('message', Message);
+
+    Vue.directive('my-directive', {
+      bind : function() {
+        // console.log('bind', arguments);
+      },
+      update : function(newValue, oldValue) {
+        console.log('update', newValue, oldValue)
+      },
+      unbind : function() {
+        console.log('unbind', arguments);
+      }
+    });
+
+    Vue.directive('my-msg', {
+      bind : function() {
+        console.log('~~~~~~~~~~~bind~~~~~~~~~~~~~');
+        console.log('el', this.el);
+        console.log('name', this.name);
+        console.log('vm', this.vm);
+        console.log('expression', this.expression);
+        console.log('arg', this.arg);
+        console.log('modifiers', this.modifiers);
+        console.log('descriptor', this.descriptor);
+      },
+      update : function(newValue, oldValue) {
+        // console.log('~~~~~~~~~~~update~~~~~~~~~~~~~');
+        // console.log('name', this.name);
+        // console.log('expression', this.expression);
+        // console.log('arg', this.arg);
+        // console.log('modifiers', this.modifiers);
+        // console.log('descriptor', this.descriptor);
+        var keys = Object.keys(this.modifiers);    
+        window[this.arg][keys[0]](newValue);
+
+      },
+      unbind : function() {
+        console.log('~~~~~~~~~~~unbind~~~~~~~~~~~~~');
+        console.log('name', this.name);
+        console.log('expression', this.expression);
+        console.log('arg', this.arg);
+        console.log('modifiers', this.modifiers);
+        console.log('descriptor', this.descriptor);
+      }
+    });
+
+    // elementDirective
+    Vue.elementDirective('my-ele-directive', {
+      bind : function() {
+        console.log('ele-directive bind : ' + this.el);
+        this.el.innerHTML = '<div></div>'
+      },
+      update : function(newValue, oldValue) {
+        console.log(newValue)
+      },
+      unbind : function() {},
+    })
+
+    // advance
+    Vue.directive('my-advance-directive', {
+      params : ['a'],
+      paramWatchers : {
+        a : function(val, oldVal) {
+          console.log('watcher: ', val, oldVal)
+        }
+      },
+      bind : function() {
+        console.log('params', this.params);
+      }
+    });
+
+    // deep
+    Vue.directive('my-deep-directive', {
+      deep : true,
+      update : function(newValue, oldValue) {
+        console.log('deep', newValue.a.b);
+      }
+    });
+    Vue.directive('my-nodeep-directive', {
+      update : function(newValue, oldValue) {
+        console.log('nodeep', newValue.a.b);
+      }
+    });
+
+    // twoway
+    Vue.directive('my-twoway-directive', {
+      twoWay : true,
+      bind : function() {
+        this.handler = function () {
+          console.log('value changed: ', this.el.value);
+          this.set(this.el.value)
+        }.bind(this)
+        this.el.addEventListener('input', this.handler)
+      },
+      unbind: function () {
+        this.el.removeEventListener('input', this.handler)
+      }
+    });
+    Vue.directive('my-notwoway-directive', {
+      bind : function() {
+        this.handler = function () {
+          this.set(this.el.value)
+        }.bind(this)
+        this.el.addEventListener('input', this.handler)
+      },
+      unbind: function () {
+        this.el.removeEventListener('input', this.handler)
+      }
+    });
+
+    // acceptStatment
+    Vue.directive('my-statement-directive', {
+      acceptStatement : true,
+      update : function(fn) {
+        // console.log(fn);
+      }
+    });
+
+    var vm = new Vue({
+      el : '#app',
+      data : {
+        viewBox : '0,0,40,30',
+        param : 'first',
+        content : 'there is the content',
+        isExist : false,
+        isMsg : true,
+        a : 'dynamic data',
+        i : 0,
+        obj : {
+          a : {
+            b : 'inner'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

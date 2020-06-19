@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="content">
+    <button @click="addTodo">添加</button>
+    <button @click="broadcast">广播</button>
+    <child-todo name="one"></child-todo>
+    <child-todo name="two"></child-todo>
+    <ul>
+      <li v-for="value in todo">
+        {{ value }}
+      </li>
+    </ul>
+  </div>
+  <script type="text/javascript" src="./../vue.1.0.26.js"></script>
+  <script type="text/javascript">
+
+  Vue.component('child-todo', {
+    props : ['name'],
+    data : function() {
+      return {
+        content : ''
+      }
+    },
+    template : '<div>\
+        Child {{name}} \
+        <input type="text" v-model="content"/> \
+        <button @click="add">添加</button> \
+      </div>',
+    methods : {
+      add : function() {
+        this.$dispatch('add', 'Child ' + this.name + ': ' + this.content);
+        this.content = '';
+      }
+    },
+    events : {
+      'to-child' : function(msg) {
+        this.$dispatch('add', 'Child ' + this.name + ': ' + msg);
+      }
+    }
+  });
+
+  var vm = new Vue({
+    el : '#app',
+    data : {
+      todo : [],
+      content : ''
+    },
+    methods : {
+      addTodo : function() {
+        this.$emit('add', 'Parent: ' + this.content);
+        this.content = '';
+      },
+      broadcast : function() {
+        this.$broadcast('to-child', this.content);
+        this.content = '';
+      }
+    },
+    events : {
+      'add' : function(msg) {
+        this.todo.push(msg);
+      }
+    }
+  });
+
+    // var vm = new Vue({
+    //   el : '#app',
+    //   data : {
+    //     todo : []
+    //   },
+    //   methods : {
+    //     begin : function() {
+    //       this.$on(‘add’, function(msg) {
+    //         this.todo.push(msg);
+    //       });
+    //     }
+    //   }
+    // });
+
+
+  </script>
+</body>
+</html>

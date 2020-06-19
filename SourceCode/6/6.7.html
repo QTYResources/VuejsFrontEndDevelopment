@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vue入门与实例</title>
+  <meta charset="utf-8">
+  <style type="text/css">
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <comp-a></comp-a>
+    <comp-b></comp-b>
+  </div>
+  <script type="text/javascript" src="./../vue.2.0-beta.1.js"></script>
+  <script type="text/javascript">
+
+var bus = new Vue();
+
+  var vm = new Vue({
+    el : '#app',
+    components : {
+      compA : {
+        template : '<div> \
+            <input type="text" v-model="name" /> \
+            <button @click="create">添加</button> \
+          </div>',
+        data : function() {
+          return {
+            name : ''
+          }
+        },
+        methods : {
+          create : function() {
+            bus.$emit('create', { name : this.name });
+            this.name = '';
+          }
+        }
+      },
+      compB : {
+        template : '<ul> \
+          <li v-for="item in items">{{ item.name }} </li> \
+        </ul>',
+        data : function() {
+          return {
+            items : []
+          }
+        },
+        mounted() {
+          var that = this;
+          bus.$on('create', function(data) {
+            that.items.push(data);
+          })
+        }
+      },
+    }
+  });
+
+  </script>
+</body>
+</html>
