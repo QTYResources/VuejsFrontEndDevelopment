@@ -29,6 +29,7 @@ Chapter02 第2章 基础特性
   04. BindMethod.html                                       ===> 绑定 DOM 事件
   05. Lifecycle.html                                        ===> Vue 实例的生命周期
   06. DataBind.html                                         ===> 数据绑定的使用
+  07. ComputedAttributes.html                               ===> 计算属性
 
 Chapter03 第3章 指令
 
