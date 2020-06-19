@@ -17,7 +17,9 @@ ISBN: 978-7-115-44493-6
   4619
 
 Chapter01 第1章 Vue.js简介
-
+  01. HelloWorldUseCDN.html                                 ===> 使用 CDN 引入 Vue.js
+  02. HelloWorldUseNpm.html                                 ===> 使用 npm 引入 Vue.js
+  
 
 Chapter02 第2章 基础特性
 
