@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Form Data Binding</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="message" />
+      <span>Your input is : {{message}}</span><br/>
+
+      <!-- <label><input type="radio" value="male" v-model="gender" />男</label>
+      <label><input type="radio" value="female" v-model="gender" />女</label>
+      <p>{{gender}}</p> -->
+
+      <!-- <input type="checkbox" v-model="checked" />
+      <span>checked: {{checked}}</span><br/> -->
+
+      <label><input type="checkbox" value="1" v-model="multiChecked" />1</label>
+      <label><input type="checkbox" value="2" v-model="multiChecked" />2</label>
+      <label><input type="checkbox" value="3" v-model="multiChecked" />3</label>
+      <p>MultiChecked: {{multiChecked.join('|')}}</p>
+
+      <!-- <select v-model="selected">
+        <option selected>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>Selected: {{selected}}</span><br/><br/><br/> -->
+
+      <select v-model="multiSelected" multiple>
+        <option selected>A</option>
+        <option>B</option>
+        <option selected>C</option>
+      </select>
+      <span>MultiSelected: {{multiSelected.join('|')}}</span><br/>
+
+      <!-- checkbox 选中时，checked 的值为 a 属性的值；未选中时为 b 属性的值 -->
+      <input type="checkbox" v-model="checked" v-bind:true-value="a" v-bind:false-value="b" />
+      <span>checked: {{checked}}</span><br/>
+
+      <!-- 选择男的 radio 时，gender 的值为 a 属性的值；选择女的 radio 时为 b 属性的值 -->
+      <label><input type="radio" value="male" v-model="gender" v-bind:value="a" />男</label>
+      <label><input type="radio" value="female" v-model="gender" v-bind:value="b" />女</label>
+      <p>{{gender}}</p>
+
+      <!-- 选择其中一个选项时，selected 的值为一个对象，该对象中有一个 number 属性 -->
+      <select v-model="selected">
+        <option selected v-bind:value="{number: 123}">A</option>
+        <option v-bind:value="{number: 456}">B</option>
+        <option v-bind:value="{number: 789}">C</option>
+      </select>
+      <span>Selected: {{selected}}</span><br/><br/><br/>
+
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          a: 'amont',
+          b: 'bose',
+          message: '',
+          gender: '',
+          checked: '',
+          multiChecked: [],
+          selected: '',
+          multiSelected: []
+        }
+      })
+    </script>

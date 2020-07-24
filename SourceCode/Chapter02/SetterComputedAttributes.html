@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Setter Computed Attributes</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  </head>
+  <body>
+    <div id="el">
+      <p>&yen;{{price}}</p>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#el',
+        data: {
+          cents: 100,
+        },
+        computed: {
+          price: {
+            set: function(newValue) {
+              this.cents = newValue * 100
+            },
+            get: function() {
+              return (this.cents / 100).toFixed(2)
+            }
+          }
+        }
+      })
+    </script>

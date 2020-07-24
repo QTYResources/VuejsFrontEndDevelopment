@@ -30,7 +30,10 @@ Chapter02 第2章 基础特性
   05. Lifecycle.html                                        ===> Vue 实例的生命周期
   06. DataBind.html                                         ===> 数据绑定的使用
   07. ComputedAttributes.html                               ===> 计算属性
-
+  08. SetterComputedAttributes.html                         ===> 计算属性的get和set方法
+  09. FormDataBinding.html                                  ===> 表单控件数据绑定
+  10. ConditionalRendering.html                             ===> 条件渲染
+  
 Chapter03 第3章 指令
 
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>条件渲染</title>
+    </head>
+    <body>
+        <div id="app">
+            <div v-if="yea">yes</div>
+            <div v-else>no</div>
+            <div v-if="yes">yes1</div>
+            <p>the v-else div shows</p>
+            <div v-else>no1</div>
+            <div v-if="yes">
+                <div v-if="inner">inner</div>
+                <div v-else>not inner</div>
+            </div>
+            <div v-else>no</div>
+        </div>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    yes:true,
+                    inner: false
+                }
+            })
+        </script>
+    </body>
+</html>
